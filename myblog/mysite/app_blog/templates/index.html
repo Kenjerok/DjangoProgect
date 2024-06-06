@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Home - Steam Blog{% endblock %}
+{% block content %}
+<div class="row mt-4">
+    {% if categories %}
+        <div class="col-md-3">
+            <h4>Categories:</h4>
+            <ul class="list-group">
+                {% for category in categories %}
+                    <li class="list-group-item">
+                        <a href="{{ category.get_absolute_url }}">{{ category.category }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+    <div class="col-md-9">
+        <h2>Latest Articles</h2>
+        {% if articles %}
+            {% for article in articles %}
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title"><a href="{{ article.get_absolute_url }}">{{ article.title }}</a></h5>
+                        <p class="card-text">{{ article.description | safe }}</p>
+                        <p class="card-text"><small class="text-muted">{{ article.pub_date }}</small></p>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>No articles found.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+<p></p>
